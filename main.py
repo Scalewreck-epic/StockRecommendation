@@ -8,13 +8,14 @@ screener = input("Enter stock screener:")
 exchange = input("Enter stock exchange:")
 
 while True:
-    output = TA_Handler(symbol=symbol, screener=screener, exchange=exchange, interval=Interval.INTERVAL_1_MINUTE)
-    buyAmount = output.get_analysis().summary.get("BUY")
-    sellAmount = output.get_analysis().summary.get("SELL")
-    neutralAmount = output.get_analysis().summary.get("NEUTRAL")
+    output_minute = TA_Handler(symbol=symbol, screener=screener, exchange=exchange, interval=Interval.INTERVAL_1_MINUTE)
 
-    print(f"Recommendation: Buy: {buyAmount} Sell: {sellAmount} Neutral: {neutralAmount}")
+    recommendation = output_minute.get_analysis().summary.get("RECOMMENDATION")
+    buy = output_minute.get_analysis().summary.get("BUY")
+    sell = output_minute.get_analysis().summary.get("SELL")
+    neutral = output_minute.get_analysis().summary.get("NEUTRAL")
 
-    time.sleep(1)
+    print(f"Recommendation: {recommendation} Buy: {buy} Sell: {sell}, Neutral: {neutral}")
 
-    input("Press Enter to refresh")
+    print("Refreshes in 1 minute")
+    time.sleep(60)
